@@ -1,24 +1,13 @@
-App Engine Java Guestbook
-Copyright (C) 2010-2012 Google Inc.
+book
+====
 
-## Sample guestbook for use with App Engine Java.
+Small project with Google App Engine + Spring + Maven
 
-Requires [Apache Maven](http://maven.apache.org) 3.0 or greater, and JDK 6+ in order to run.
+We can find some projects on Internet with (Google App Engine + Spring MVC) or (Google App Engine + Maven),
+but there is nearly no project created with the three technologies.
 
-To build, run
+So I will try to create a small project with the three technologies above. The goal of this project is to allow my
+friend who learns makeup to upload her works(pictures) which can be viewed by anyone.
 
-    mvn package
-
-Building will run the tests, but to explicitly run tests you can use the test target
-
-    mvn test
-
-To start the app, use the [App Engine Maven Plugin](http://code.google.com/p/appengine-maven-plugin/) that is already included in this demo.  Just run the command.
-
-    mvn appengine:devserver
-
-For further information, consult the [Java App Engine](https://developers.google.com/appengine/docs/java/overview) documentation.
-
-To see all the available goals for the App Engine plugin, run
-
-    mvn help:describe -Dplugin=appengine
+Notes:
+1. In GAE, session is not enabled by default. To enable it, add "<sessions-enabled>true</sessions-enabled>" to "appengine-web.xml"
