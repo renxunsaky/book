@@ -1,6 +1,5 @@
 package com.surpassun.book.util;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,9 +9,9 @@ import org.springframework.web.HttpSessionRequiredException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
-public class MakeupExceptionResolver extends SimpleMappingExceptionResolver {
+public class BookExceptionResolver extends SimpleMappingExceptionResolver {
     
-    private final static Logger log = Logger.getLogger(MakeupExceptionResolver.class.getName());
+    private final static Logger log = Logger.getLogger(BookExceptionResolver.class.getName());
     
     @Override
     public ModelAndView doResolveException(HttpServletRequest request, HttpServletResponse response, Object handler,

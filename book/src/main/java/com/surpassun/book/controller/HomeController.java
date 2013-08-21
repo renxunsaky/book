@@ -45,6 +45,6 @@ public class HomeController {
 			}
 		}
 		
-		return ViewName.HOME;
+		return ViewName.REDIRECT_HOME;
 	}
 }
