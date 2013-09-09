@@ -16,6 +16,7 @@
         <mockito.version>1.9.0</mockito.version>
         <slf4j.version>1.6.6</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
+        <twig.version>1.0.4</twig.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -110,7 +111,20 @@
             <version>${appengine.target.version}</version>
             <scope>test</scope>
         </dependency>
+        
+        <dependency>
+			<groupId>com.vercer.engine.persist</groupId>
+			<artifactId>twig-persist</artifactId>
+			<version>${twig.version}</version>
+        </dependency>
     </dependencies>
+    
+    <repositories>
+    	<repository>
+    		<id>twig</id>
+    		<url>http://mvn.twig-persist.googlecode.com/hg</url>
+    	</repository>
+    </repositories>
 
     <build>
         <plugins>
