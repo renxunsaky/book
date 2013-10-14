@@ -13,7 +13,11 @@
 <a href="?locale=en_US">English</a>
 
 <form enctype="multipart/form-data" method="post" action="<%= blobstoreService.createUploadUrl("/upload.html") %>">
-	<input type="file" multiple="multiple" name="images" />
+	<input type="file" multiple="multiple" name="imagess" />
 	
 	<input type="submit" value="Upload" />
 </form>
+
+<h2>blobkey is : ${imgUrl}</h2>
+<img src="${imgUrl}" alt="imgUrl" />
+

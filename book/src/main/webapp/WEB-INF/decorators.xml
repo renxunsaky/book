@@ -1,0 +1,26 @@
+<decorators defaultdir="/WEB-INF/decorators">
+	<decorator name="default" page="default.jsp">
+		<pattern>/accueil.html</pattern>
+		<pattern>/conquete/authentification.html</pattern>
+		<pattern>/conquete/paiement.html</pattern>
+		<pattern>/conquete/validation-iccid.html</pattern>
+		<pattern>/conquete/informations.html</pattern>
+		<pattern>/conquete/choix-offre.html</pattern>
+		<pattern>/conquete/confirmation.html</pattern>
+		<pattern>/multisurf/confirmation.html</pattern>
+		<pattern>/multisurf/authentification.html</pattern>
+		<pattern>/multisurf/incompatible.html</pattern>
+		<pattern>/multisurf/validation-iccid.html</pattern>
+		<pattern>/error/index.html</pattern>
+		<pattern>/error/order.html</pattern>
+	</decorator>
+	<excludes>
+		<pattern>/m/*</pattern>
+		<pattern>/ajax/*</pattern>
+		<pattern>/rest/*</pattern>
+		<pattern>/select-ligne/first.html</pattern>
+		<pattern>/select-ligne-fisrt.html</pattern>
+		<pattern>/select-ligne.html*</pattern>
+		<pattern>/test-gm.html*</pattern>
+	</excludes>
+</decorators>

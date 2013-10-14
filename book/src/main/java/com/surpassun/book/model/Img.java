@@ -7,7 +7,7 @@ import com.vercer.engine.persist.annotation.Child;
 import com.vercer.engine.persist.annotation.Parent;
 import com.vercer.engine.persist.annotation.Type;
 
-public class Image {
+public class Img {
 
 	private long id;
 	private String blobKey;
@@ -22,7 +22,7 @@ public class Image {
 	@Child
 	private List<Comment> comments;
 
-	public Image(String blobKey, Date createDate, Category category, int views,
+	public Img(String blobKey, Date createDate, Category category, int views,
 			List<Comment> comments) {
 		super();
 		this.blobKey = blobKey;

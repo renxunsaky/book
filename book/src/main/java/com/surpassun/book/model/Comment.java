@@ -19,13 +19,13 @@ public class Comment {
 	private String ip;
 	
 	@Parent
-	private Image image;
+	private Img image;
 	
 	public Comment() {
 	}
 
 	public Comment(int starts, String content, Date commentDate, String ip,
-			Image image) {
+			Img image) {
 		super();
 		this.starts = starts;
 		this.content = content;
@@ -74,11 +74,11 @@ public class Comment {
 		this.ip = ip;
 	}
 
-	public Image getImage() {
+	public Img getImage() {
 		return image;
 	}
 
-	public void setImage(Image image) {
+	public void setImage(Img image) {
 		this.image = image;
 	}
 }
