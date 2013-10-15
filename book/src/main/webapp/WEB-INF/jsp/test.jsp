@@ -20,4 +20,3 @@
 
 <h2>blobkey is : ${imgUrl}</h2>
 <img src="${imgUrl}" alt="imgUrl" />
-

@@ -28,7 +28,6 @@ import com.surpassun.book.service.ImgService;
 import com.surpassun.book.util.ViewName;
 
 @Controller
-@RequestMapping("/**")
 public class HomeController {
 	
 	private Logger log = Logger.getLogger(HomeController.class.getName());
@@ -38,7 +37,7 @@ public class HomeController {
     @Autowired
     private ImgService imageService;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/home", method = RequestMethod.GET)
 	public String view() {
 		return ViewName.HOME;
 	}

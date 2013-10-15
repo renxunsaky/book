@@ -8,5 +8,5 @@ public interface ViewName {
     
     String REDIRECT_HOME = REDIRECT + "/index.html";
     
-    String HOME = "index";
+    String HOME = "test";
 }
