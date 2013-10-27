@@ -6,7 +6,7 @@ public interface ViewName {
     
     String ERROR_PAGE = "/error/index";
     
-    String REDIRECT_HOME = REDIRECT + "/index.html";
+    String REDIRECT_HOME = REDIRECT + "/home.html";
     
-    String HOME = "test";
+    String HOME = "home";
 }

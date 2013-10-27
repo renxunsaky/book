@@ -10,13 +10,13 @@
 
     <properties>
         <appengine.app.version>1</appengine.app.version>
-        <appengine.target.version>1.8.3</appengine.target.version>
+        <appengine.target.version>1.8.6</appengine.target.version>
         <spring.version>3.2.3.RELEASE</spring.version>
         <junit.version>4.10</junit.version>
         <mockito.version>1.9.0</mockito.version>
         <slf4j.version>1.6.6</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
-        <twig.version>1.0.4</twig.version>
+        <twig.version>2.0-SNAPSHOT</twig.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

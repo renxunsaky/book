@@ -10,6 +10,7 @@ import com.vercer.engine.persist.annotation.Type;
 public class Img {
 
 	private long id;
+	
 	private String blobKey;
 	
 	@Type(Date.class)
@@ -17,6 +18,7 @@ public class Img {
 	
 	@Parent
 	private Category category;
+	
 	private int views;
 	
 	@Child

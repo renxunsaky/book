@@ -11,4 +11,14 @@ public interface ImgService {
 	public Key saveImage(Img image);
 
 	public Map<Img, Key> saveImages(List<Img> uploadedImages);
+	
+	public Img getImage(String blobKey);
+	
+	public List<Img> getImages(List<String> blobKeys);
+	
+	public void updateImage(Img image);
+	
+	public void deleteImage(Img image);
+	
+	public List<Img> getImagesByCategory(String categoryBlobKey);
 }
