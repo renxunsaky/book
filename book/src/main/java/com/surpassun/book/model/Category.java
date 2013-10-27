@@ -5,6 +5,7 @@ public class Category {
 	private long id;
 	private String name;
 	private String description;
+	private String imageUrl;
 	
 	public Category() {
 	}
@@ -36,5 +37,13 @@ public class Category {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 }

@@ -1,22 +1,28 @@
 <%@ include file="/WEB-INF/jsp/common/include.jsp"%>
 
-<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
-<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
-
-<%
-    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-%>
-
-
-<spring:message code="account.connection"></spring:message>
-
-<a href="?locale=en_US">English</a>
-
-<form enctype="multipart/form-data" method="post" action="<%= blobstoreService.createUploadUrl("/upload.html") %>">
-	<input type="file" multiple="multiple" name="imagess" />
-	
-	<input type="submit" value="Upload" />
-</form>
-
-<h2>blobkey is : ${imgUrl}</h2>
-<img src="${imgUrl}" alt="imgUrl" />
+<html>
+	<head>
+	</head>
+	<body class="homeBody">
+		<div class="wrapper">
+			<div class="head">
+				<div class="logo">
+					<img alt="Makeup-Mengdie" src='<c:url value="/img/logo.png"></c:url>' />
+				</div>
+				
+				<div class="navigation">
+					<%@ include file="/WEB-INF/jsp/common/navigation.jsp"%>
+				</div>
+			</div>
+			<div class="content">
+				<div class="scrollbar">
+					<c:forEach items="${images}" var="image">
+						<a href='<c:url value="/images/${image.id}"></c:url>'>
+							<img src="${imgage.servingUrl}" />
+						</a>
+					</c:forEach>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
