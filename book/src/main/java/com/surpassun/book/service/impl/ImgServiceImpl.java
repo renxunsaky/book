@@ -7,9 +7,13 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.datastore.Category;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.images.ImagesService;
+import com.google.appengine.api.images.ImagesServiceFactory;
+import com.google.appengine.api.images.ServingUrlOptions;
 import com.google.appengine.repackaged.com.google.common.collect.Lists;
 import com.surpassun.book.model.Img;
 import com.surpassun.book.service.ImgService;
@@ -17,13 +21,23 @@ import com.surpassun.book.service.ImgService;
 @Service("imageService")
 public class ImgServiceImpl extends AbstractServiceImpl implements ImgService {
 	
+	ImagesService imgService = ImagesServiceFactory.getImagesService();
+	
 	@Override
 	public Key saveImage(Img image) {
+		String servingUrl = imgService.getServingUrl(ServingUrlOptions.Builder.withBlobKey(new BlobKey(image.getBlobKey())));
+		image.setServingUrl(servingUrl);
 		return datastore.store(image);
 	}
 
 	@Override
 	public Map<Img, Key> saveImages(List<Img> uploadedImages) {
+		if (uploadedImages != null) {
+			for (Img image : uploadedImages) {
+				String servingUrl = imgService.getServingUrl(ServingUrlOptions.Builder.withBlobKey(new BlobKey(image.getBlobKey())));
+				image.setServingUrl(servingUrl);
+			}
+		}
 		return datastore.storeAll(uploadedImages);
 	}
 

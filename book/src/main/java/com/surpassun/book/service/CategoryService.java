@@ -13,6 +13,8 @@ public interface CategoryService {
 	
 	public List<Category> getCategories(List<String> blobKeys);
 	
+	public List<Category> getAllCategories();
+	
 	public void updateCategory(Category category);
 	
 	public void deleteCategory(Category category);

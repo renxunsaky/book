@@ -7,7 +7,7 @@
 		<div class="wrapper">
 			<div class="head">
 				<div class="logo">
-					<img alt="Makeup-Mengdie" src='<c:url value="/img/logo.png"></c:url>' />
+					<img alt="Makeup-Mengdie" src='<c:url value="/img/logo.png" />' />
 				</div>
 				
 				<div class="navigation">

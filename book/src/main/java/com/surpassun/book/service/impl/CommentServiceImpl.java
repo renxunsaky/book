@@ -2,11 +2,14 @@ package com.surpassun.book.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.google.appengine.api.datastore.Key;
 import com.surpassun.book.model.Comment;
 import com.surpassun.book.model.Img;
 import com.surpassun.book.service.CommentService;
 
+@Service("commentService")
 public class CommentServiceImpl extends AbstractServiceImpl implements CommentService {
 
 	@Override

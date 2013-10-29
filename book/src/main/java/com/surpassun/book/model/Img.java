@@ -21,6 +21,8 @@ public class Img {
 	
 	private int views;
 	
+	private String servingUrl;
+	
 	@Child
 	private List<Comment> comments;
 
@@ -72,6 +74,14 @@ public class Img {
 
 	public void setViews(int views) {
 		this.views = views;
+	}
+
+	public String getServingUrl() {
+		return servingUrl;
+	}
+
+	public void setServingUrl(String servingUrl) {
+		this.servingUrl = servingUrl;
 	}
 
 	public List<Comment> getComments() {

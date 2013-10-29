@@ -3,11 +3,13 @@ package com.surpassun.book.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.google.appengine.api.datastore.Key;
 import com.surpassun.book.model.Category;
-import com.surpassun.book.model.Img;
 import com.surpassun.book.service.CategoryService;
 
+@Service("categoryService")
 public class CategoryServiceImpl extends AbstractServiceImpl implements CategoryService {
 
 	@Override
@@ -37,6 +39,11 @@ public class CategoryServiceImpl extends AbstractServiceImpl implements Category
 	@Override
 	public void deleteCategory(Category category) {
 		datastore.delete(category);
+	}
+
+	@Override
+	public List<Category> getAllCategories() {
+		return datastore.find().type(Category.class).returnAllResultsNow();
 	}
 
 }

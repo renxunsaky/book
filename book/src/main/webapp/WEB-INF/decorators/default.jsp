@@ -10,11 +10,12 @@
         <meta name="description" content="Slide Down Box Menu with jQuery and CSS3" />
         <meta name="keywords" content="jquery, css3, sliding, box, menu, cube, navigation, portfolio, thumbnails"/>
 		
-		<link type="text/css" rel="stylesheet" href="<c:url value="/stylesheets/main.css"></c:url>" />
-		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+		<link type="text/css" rel="stylesheet" href="<c:url value="/stylesheets/main.css" />" />
+		<link rel="shortcut icon" href="<c:url value="/img/favicon.ico" />" type="image/x-icon"/>
 		
-		<script type="text/javascript" src="<c:url value="/js/jquery-1.10.2.min.js"></c:url>"></script>
-		<script type="text/javascript" src="<c:url value="/js/jquery.easing.1.3.js"></c:url>"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery-1.10.2.min.js' />"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery.easing.1.3.js' />"></script>
+		<script type="text/javascript" src="<c:url value='/js/book.js' />"></script>
 		
 		<decorator:head />
 	</head>

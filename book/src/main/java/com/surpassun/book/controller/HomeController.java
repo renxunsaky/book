@@ -8,10 +8,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +23,11 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.ServingUrlOptions;
+import com.surpassun.book.model.Category;
 import com.surpassun.book.model.Img;
+import com.surpassun.book.service.CategoryService;
 import com.surpassun.book.service.ImgService;
+import com.surpassun.book.util.Constants;
 import com.surpassun.book.util.ViewName;
 
 @Controller
@@ -34,11 +37,19 @@ public class HomeController {
 	
     private BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     
-    @Autowired
+    @Inject
+    private CategoryService categoryService;
+    
+    @Inject
     private ImgService imageService;
 
 	@RequestMapping(value="/home", method = RequestMethod.GET)
-	public String view() {
+	public String view(Model model) {
+		
+		//load all of the categories
+		List<Category> navItems = categoryService.getAllCategories();
+		model.addAttribute(Constants.NAV_ITEMS, navItems);
+		
 		return ViewName.HOME;
 	}
 	
