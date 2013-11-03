@@ -8,17 +8,10 @@
 					<img src="${ item.imageUrl }" />
 					<span class="sdt_active"></span>
 					<span class="sdt_wrap">
-						<span class="std_link">${ item.name }</span>
-						<span class="std_descr">${ item.description }</span>
+						<span class="sdt_link">${ item.name }</span>
+						<span class="sdt_descr">${ item.description }</span>
 					</span>
 				</a>
-				<!-- 
-				<div class="sdt_box">
-					<c:forEach items="${ item.subLinks }" var="subLink">
-						<a href="${ subLink.value }">${ subLink.key }</a>
-					</c:forEach>
-				</div>
-				 -->
 			</li>
 		</c:forEach>
 	</c:if>

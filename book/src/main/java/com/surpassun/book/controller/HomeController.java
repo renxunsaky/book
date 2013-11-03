@@ -8,10 +8,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +23,12 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.ServingUrlOptions;
+import com.surpassun.book.bean.CategoryBean;
 import com.surpassun.book.model.Category;
 import com.surpassun.book.model.Img;
 import com.surpassun.book.service.CategoryService;
 import com.surpassun.book.service.ImgService;
+import com.surpassun.book.service.LanguageService;
 import com.surpassun.book.util.Constants;
 import com.surpassun.book.util.ViewName;
 
@@ -37,17 +39,36 @@ public class HomeController {
 	
     private BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     
-    @Inject
+    @Autowired
     private CategoryService categoryService;
     
-    @Inject
+    @Autowired
     private ImgService imageService;
 
+    @Autowired
+    private LanguageService languageService;
+    
+    private final static String DEFAULT_LANG = "zh";
+    
 	@RequestMapping(value="/home", method = RequestMethod.GET)
-	public String view(Model model) {
+	public String view(HttpServletRequest request, Model model) {
+		String lang = DEFAULT_LANG;
+		if (request.getLocale() != null) {
+			lang = request.getLocale().getLanguage();
+		}
+		
+		List<CategoryBean> navItems = new ArrayList<CategoryBean>();
 		
 		//load all of the categories
-		List<Category> navItems = categoryService.getAllCategories();
+		List<Category> categories = categoryService.getActiveCategories();
+		if (categories != null) {
+			for (Category category : categories) {
+				CategoryBean bean = new CategoryBean();
+				bean.copyFromEntity(category, lang, languageService);
+				navItems.add(bean);
+			}
+		}
+		
 		model.addAttribute(Constants.NAV_ITEMS, navItems);
 		
 		return ViewName.HOME;

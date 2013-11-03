@@ -1,6 +1,11 @@
 <decorators defaultdir="/WEB-INF/decorators">
-	<decorator name="default" page="default.jsp">
+	<decorator name="default" page="defaultTemplate.jsp">
 		<pattern>/home.html</pattern>
+	</decorator>
+	<decorator name="admin" page="adminTemplate.jsp">
+		<pattern>/admin.html</pattern>
+		<pattern>/admin/category.html</pattern>
+		<pattern>/admin/image.html</pattern>
 	</decorator>
 	<excludes>
 		<pattern>/ajax/*</pattern>

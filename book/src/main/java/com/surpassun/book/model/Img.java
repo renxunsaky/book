@@ -3,13 +3,15 @@ package com.surpassun.book.model;
 import java.util.Date;
 import java.util.List;
 
-import com.vercer.engine.persist.annotation.Child;
-import com.vercer.engine.persist.annotation.Parent;
-import com.vercer.engine.persist.annotation.Type;
+import com.google.code.twig.annotation.Child;
+import com.google.code.twig.annotation.Id;
+import com.google.code.twig.annotation.Parent;
+import com.google.code.twig.annotation.Type;
 
 public class Img {
 
-	private long id;
+	@Id
+	private Long id;
 	
 	private String blobKey;
 	
@@ -36,11 +38,11 @@ public class Img {
 		this.comments = comments;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

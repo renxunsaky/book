@@ -16,6 +16,7 @@ ul.sdt_menu li{
 	height:85px;
 	position:relative;
 	cursor:pointer;
+	margin: 0 5px;
 }
 ul.sdt_menu li > a{
 	position:absolute;
@@ -78,7 +79,7 @@ ul.sdt_menu li span span.sdt_descr{
 	color:#0B75AF;
 	float:left;
 	clear:both;
-	width:155px; /*For dumbass IE7*/
+	width:155px;
 	font-size:10px;
 	letter-spacing:1px;
 }

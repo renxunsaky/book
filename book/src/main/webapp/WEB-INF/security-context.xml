@@ -20,7 +20,7 @@
 		
 		<http-basic />
 		<logout logout-url="/logout.html" />
-		<access-denied-handler error-page="/jsp/403.jsp" />
+		<access-denied-handler error-page="/403" />
 	</http>
 
 	<authentication-manager>

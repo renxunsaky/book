@@ -1,42 +1,30 @@
 package com.surpassun.book.model;
 
+import com.google.code.twig.annotation.Id;
+
 public class Category {
 
-	private long id;
-	private String name;
-	private String description;
+	@Id
+	private Long id;
 	private String imageUrl;
+	private Boolean active;
+	private int axe;
 	
 	public Category() {
 	}
 	
-	public Category(String name, String description) {
-		this.name = name;
-		this.description = description;
+	public Category(String imageUrl, Boolean active, int axe) {
+		this.imageUrl = imageUrl;
+		this.active = active;
+		this.axe = axe;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public String getImageUrl() {
@@ -45,5 +33,25 @@ public class Category {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public Boolean isActive() {
+		return active;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+	
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	public int getAxe() {
+		return axe;
+	}
+
+	public void setAxe(int axe) {
+		this.axe = axe;
 	}
 }

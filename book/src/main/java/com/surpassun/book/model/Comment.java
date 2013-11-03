@@ -3,12 +3,14 @@ package com.surpassun.book.model;
 import java.sql.Blob;
 import java.util.Date;
 
-import com.vercer.engine.persist.annotation.Parent;
-import com.vercer.engine.persist.annotation.Type;
+import com.google.code.twig.annotation.Id;
+import com.google.code.twig.annotation.Parent;
+import com.google.code.twig.annotation.Type;
 
 public class Comment {
 
-	private long id;
+	@Id
+	private Long id;
 	private int starts;
 	
 	@Type(Blob.class)
@@ -34,11 +36,11 @@ public class Comment {
 		this.image = image;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

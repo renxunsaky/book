@@ -5,45 +5,36 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.surpassun.book.model.Category;
 import com.surpassun.book.service.CategoryService;
 
 @Service("categoryService")
-public class CategoryServiceImpl extends AbstractServiceImpl implements CategoryService {
+public class CategoryServiceImpl extends AbstractServiceImpl<Category> implements CategoryService {
 
-	@Override
-	public Key saveCategory(Category category) {
-		return datastore.store(category);
-	}
-
-	@Override
-	public Category getCategory(String blobKey) {
-		return datastore.load(Category.class, blobKey);
+	public CategoryServiceImpl() {
+		super(Category.class);
 	}
 
 	@Override
 	public List<Category> getCategories(List<String> blobKeys) {
 		List<Category> results = new ArrayList<>();
 		for (String key : blobKeys) {
-			results.add(getCategory(key));
+			results.add(get(key));
 		}
 		return results;
 	}
 
 	@Override
-	public void updateCategory(Category category) {
-		datastore.storeOrUpdate(category);
+	public void delete(long id) {
+		Category cat = datastore.load(Category.class, id);
+		if (cat != null) {
+			datastore.delete(cat);
+		}
 	}
-
+	
 	@Override
-	public void deleteCategory(Category category) {
-		datastore.delete(category);
+	public List<Category> getActiveCategories() {
+		return datastore.find().type(Category.class).addFilter("active", FilterOperator.EQUAL, Boolean.TRUE).returnAll().now();
 	}
-
-	@Override
-	public List<Category> getAllCategories() {
-		return datastore.find().type(Category.class).returnAllResultsNow();
-	}
-
 }

@@ -133,22 +133,23 @@
         </dependency>
         
         <dependency>
-			<groupId>com.vercer.engine.persist</groupId>
-			<artifactId>twig-persist</artifactId>
-			<version>${twig.version}</version>
-        </dependency>
-        <dependency>
         	<groupId>opensymphony</groupId>
         	<artifactId>sitemesh</artifactId>
         	<version>2.4.2</version>
+        </dependency>
+        
+        <dependency>
+                <groupId>com.google.code.twig</groupId>
+                <artifactId>twig-persist</artifactId>
+                <version>2.0-beta3</version>
         </dependency>
     </dependencies>
     
     <repositories>
     	<repository>
-    		<id>twig</id>
-    		<url>http://mvn.twig-persist.googlecode.com/hg</url>
-    	</repository>
+	        <id>twig</id>
+	        <url>http://mvn.twig-persist.googlecode.com/hg</url>
+        </repository>
     </repositories>
 
     <build>
@@ -188,10 +189,26 @@
                 	<jvmFlags>
                 		<jvmFlag>-Xdebug</jvmFlag>
 						<jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag>
+						<jvmFlag>-javaagent:/Users/Denis/Sites/tools/eclipse/plugins/org.zeroturnaround.eclipse.embedder_5.4.0.RELEASE-C-201309191608/jrebel/jrebel.jar</jvmFlag>
+						<jvmFlat>-noverify</jvmFlat>
                 	</jvmFlags>
                 </configuration>
             </plugin>
+
+			<plugin>
+				<groupId>org.zeroturnaround</groupId>
+				<artifactId>jrebel-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<executions>
+					<execution>
+						<id>generate-rebel-xml</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
         </plugins>
     </build>
-
 </project>

@@ -1,7 +1,6 @@
 package com.surpassun.book.service.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,13 +13,16 @@ import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.ServingUrlOptions;
-import com.google.appengine.repackaged.com.google.common.collect.Lists;
 import com.surpassun.book.model.Img;
 import com.surpassun.book.service.ImgService;
 
 @Service("imageService")
-public class ImgServiceImpl extends AbstractServiceImpl implements ImgService {
+public class ImgServiceImpl extends AbstractServiceImpl<Img> implements ImgService {
 	
+	public ImgServiceImpl() {
+		super(Img.class);
+	}
+
 	ImagesService imgService = ImagesServiceFactory.getImagesService();
 	
 	@Override
@@ -42,36 +44,20 @@ public class ImgServiceImpl extends AbstractServiceImpl implements ImgService {
 	}
 
 	@Override
-	public Img getImage(String blobKey) {
-		return datastore.load(Img.class, blobKey);
-	}
-
-	@Override
 	public List<Img> getImages(List<String> blobKeys) {
 		List<Img> results = new ArrayList<>();
 		for (String key : blobKeys) {
-			results.add(getImage(key));
+			results.add(get(key));
 		}
 		return results;
 	}
 
 	@Override
-	public void updateImage(Img image) {
-		datastore.storeOrUpdate(image);
-	}
-
-	@Override
-	public void deleteImage(Img image) {
-		datastore.delete(image);
-	}
-
-	@Override
 	public List<Img> getImagesByCategory(String categoryBlobKey) {
 		Category category = datastore.load(Category.class, categoryBlobKey);
-		Iterator<Img> images = datastore.find().type(Img.class)
+		return datastore.find().type(Img.class)
 			.addFilter("category", FilterOperator.EQUAL, category)
-			.returnResultsNow();
-		return Lists.newArrayList(images);
+			.returnAll().now();
 	}
 
 }

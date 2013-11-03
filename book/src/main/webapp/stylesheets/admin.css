@@ -1,0 +1,73 @@
+@IMPORT url("base.css");
+
+.adminGlobal {
+	font-size: 12px;
+	color: black;
+	background-color: #FFFFFF;
+}
+
+	.wrapper {
+		margin: 0 auto;
+		width: 80%;
+	}
+		.adminGlobal .wrapper .title {
+			font-size: 18px;
+    		text-align: center;
+		}
+	
+		.sidebar {
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+			background: none repeat scroll 0 0 #E9EAEE;
+		    border: 2px solid #FFFFFF;
+		    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+			width: 200px;
+			margin-right: 20px;
+			padding: 20 10px;
+		}
+			.sidebar ul {
+				list-style: none outside none;
+				padding: 0;
+				margin: 0;
+			}
+		
+			.sidebar ul li {
+				margin: 10px 0;
+				padding: 10px 10px 10px 20px;
+				background-color: #F6F4F0;
+    			border: 1px solid #D4D4D4;
+    			font-size: 16px;
+    			font-weight: normal;
+			}
+			
+			.sidebar ul li:hover {
+				background-color: #FFFFFF;
+			}
+				.sidebar ul li a {
+	    			color: #8822FF;
+				}
+			
+			.sidebar ul li.selected {
+				background-color: #F6F6AF;
+				color: #000000;
+				font-weight: bold; 
+				font-size: 18px;
+			}
+			.sidebar ul li.selected:hover {
+				background-color: #FFFFFF;
+			}
+		
+		.content {
+			width: 760px;
+			padding: 20 10px;
+		}
+			.emptyResult {
+				color: #AAAAAA;
+			    font-size: 18px;
+			    text-align: center;
+			}
+		
+			.actionButtons {
+				margin: 10px;
+			}
