@@ -56,4 +56,8 @@ public class AbstractServiceImpl<T> implements AbstractService<T> {
 	public void delete(T obj) {
 		datastore.delete(obj);
 	}
+	
+	public void deleteAll(Collection<T> objs) {
+		datastore.deleteAll(objs);
+	}
 }

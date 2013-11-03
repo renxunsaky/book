@@ -1,6 +1,7 @@
 package com.surpassun.book.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -20,13 +21,12 @@ public class LanguageServiceImpl extends AbstractServiceImpl<Language> implement
 
 	@Override
 	public String getContent(String key, String lang) {
-		List<Language> results = datastore.find().type(Language.class)
+		Language language = datastore.find().type(Language.class)
 				.addFilter("key", FilterOperator.EQUAL, key)
 				.addFilter("lang", FilterOperator.EQUAL, lang)
-				.returnAll().now();
-		
-		if (results != null && results.size() > 0) {
-			return results.get(0).getContent();
+				.returnUnique().now();
+		if (language != null) {
+			return language.getContent();
 		} else {
 			return null;
 		}
@@ -42,7 +42,18 @@ public class LanguageServiceImpl extends AbstractServiceImpl<Language> implement
 		saveAll(objs);
 	}
 	
-	private String generateKey(String fieldName, Long id) {
+	protected String generateKey(String fieldName, Long id) {
 		return Category.class.getName() + id + fieldName;
+	}
+	
+	@Override
+	public List<Language> getLangByCategoryId(Long categoryId) {
+		String[] values = {generateKey("name", categoryId), generateKey("description", categoryId)};
+		return datastore.find().type(Language.class).addFilter("key", FilterOperator.IN, Arrays.asList(values)).returnAll().now();
+	}
+
+	@Override
+	public void deleteLangByCategoryId(long categoryId) {
+		datastore.deleteAll(getLangByCategoryId(categoryId));
 	}
 }
