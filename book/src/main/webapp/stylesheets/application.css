@@ -7,10 +7,16 @@
 	width: 90%;
 }
 
+.flags {
+	height: 30px;
+    margin-bottom: 20px;
+    width: 110px;
+}
+
 .head {
 	height: 300px;
-	padding-top: 50px;
-	margin-bottom: 30px;
+    margin-bottom: 30px;
+    padding-top: 15px;
 }
 	
 	.head .logo {

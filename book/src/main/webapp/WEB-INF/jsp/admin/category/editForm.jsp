@@ -5,6 +5,8 @@
 <form action="${ successPath }" enctype="multipart/form-data" method="post" id="editCategoryForm">
 	<input type="hidden" name="id" value="${categoryBean.id}" />
 	<input type="hidden" name="lang" value="${categoryBean.lang}" id="langId" />
+	<input type="hidden" name="imageUrl" value="${categoryBean.imageUrl}" />
+	<input type="hidden" name="blobKey" value="${categoryBean.blobKey}" />
 	
 	<table>
 		<tr>
@@ -51,7 +53,9 @@
 				<spring:message code="admin.image" />
 			</td>
 			<td>
-				<img src="${categoryBean.imageUrl}" />
+				<c:if test="${ not empty categoryBean.imageUrl }">
+					<img src="${categoryBean.imageUrl}" height="170px" width="170px" />
+				</c:if>
  				<input type="file" name="image" />
 			</td>
 		</tr>

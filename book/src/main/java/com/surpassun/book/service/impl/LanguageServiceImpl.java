@@ -1,6 +1,5 @@
 package com.surpassun.book.service.impl;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,18 +33,33 @@ public class LanguageServiceImpl extends AbstractServiceImpl<Language> implement
 
 	@Override
 	public void saveLangForCategory(CategoryBean bean) {
-		List<Language> objs = new ArrayList<Language>();
-		Language name = new Language(generateKey("name", bean.getId()), bean.getName(),  bean.getLang());
-		Language description = new Language(generateKey("description", bean.getId()), bean.getDescription(),  bean.getLang());
-		objs.add(name);
-		objs.add(description);
-		saveAll(objs);
+		String nameKey = generateKey("name", bean.getId());
+		String descKey = generateKey("description", bean.getId());
+		String lang = bean.getLang();
+		
+		Language existedName = getExistedLang(nameKey, lang);
+		if (existedName != null) {
+			existedName.setContent(bean.getName());
+			update(existedName);
+		} else {
+			existedName = new Language(nameKey, bean.getName(),  lang);
+			save(existedName);
+		}
+		
+		Language existedDesc = getExistedLang(descKey, lang);
+		if (existedDesc != null) {
+			existedDesc.setContent(bean.getDescription());
+			update(existedDesc);
+		} else {
+			existedDesc = new Language(descKey, bean.getDescription(),  lang);
+			save(existedDesc);
+		}
 	}
-	
+
 	protected String generateKey(String fieldName, Long id) {
 		return Category.class.getName() + id + fieldName;
 	}
-	
+		
 	@Override
 	public List<Language> getLangByCategoryId(Long categoryId) {
 		String[] values = {generateKey("name", categoryId), generateKey("description", categoryId)};
@@ -56,4 +70,12 @@ public class LanguageServiceImpl extends AbstractServiceImpl<Language> implement
 	public void deleteLangByCategoryId(long categoryId) {
 		datastore.deleteAll(getLangByCategoryId(categoryId));
 	}
+	
+	private Language getExistedLang(String key, String lang) {
+		return datastore.find().type(Language.class)
+			.addFilter("key", FilterOperator.EQUAL, key)
+			.addFilter("lang", FilterOperator.EQUAL, lang)
+			.returnUnique().now();
+	}
+	
 }

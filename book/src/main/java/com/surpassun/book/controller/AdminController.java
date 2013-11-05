@@ -46,6 +46,8 @@ public class AdminController {
 	
 	private final static String DEFAULT_LANG = "zh";
 	
+	private static BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		
@@ -56,7 +58,6 @@ public class AdminController {
 	@RequestMapping(value = "/admin/category", method = RequestMethod.GET)
 	public String viewCategory(ModelMap model) {
 
-		BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 		String successPath = blobstoreService.createUploadUrl(Constants.ADMIN_CREATE_CATEGORY_PATH);
 		
 		List<Category> categories = categoryService.getAll();
@@ -85,7 +86,6 @@ public class AdminController {
 		CategoryBean bean = new CategoryBean();
 		bean.copyFromEntity(category, lang, languageService);
 		
-		BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 		String successPath = blobstoreService.createUploadUrl(Constants.ADMIN_CREATE_CATEGORY_PATH);
 		
 		model.addAttribute(Constants.CATEGORY_BEAN, bean);
@@ -110,7 +110,8 @@ public class AdminController {
 		bean.setActive(ParamUtil.getBoolean(request, "active"));
 		bean.setAxe(ParamUtil.getInteger(request, "axe"));
 		bean.setLang(ParamUtil.getString(request, "lang", DEFAULT_LANG));
-		BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+		bean.setImageUrl(ParamUtil.getString(request, "imageUrl"));
+		bean.setBlobKey(ParamUtil.getString(request, "blobKey"));
 		Map<String, List<BlobKey>> images = blobstoreService.getUploads(request);
 		BlobKey k = null;
 		if (images != null && images.size() > 0) {
@@ -133,9 +134,9 @@ public class AdminController {
 		}
 		
 		if (bean.getId() != null && bean.getId() > 0) {
-			categoryService.update(bean.convertToEntity(k != null));
+			categoryService.update(bean.convertToEntity(k));
 		} else {
-			Key key = categoryService.save(bean.convertToEntity(k != null));
+			Key key = categoryService.save(bean.convertToEntity(k));
 			bean.setId(key.getId());
 		}
 		languageService.saveLangForCategory(bean);

@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.appengine.api.blobstore.BlobKey;
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.surpassun.book.model.Category;
 import com.surpassun.book.service.CategoryService;
@@ -37,6 +40,13 @@ public class CategoryServiceImpl extends AbstractServiceImpl<Category> implement
 			//delete associated language objects first
 			languageService.deleteLangByCategoryId(id);
 			
+			//delete associated icon
+			if (cat.getBlobKey() != null) {
+				BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+				BlobKey blobkey = new BlobKey(cat.getBlobKey());
+				blobstoreService.delete(blobkey);
+			}
+			
 			//delete the category itself
 			delete(cat);
 		}
@@ -44,6 +54,9 @@ public class CategoryServiceImpl extends AbstractServiceImpl<Category> implement
 	
 	@Override
 	public List<Category> getActiveCategories() {
-		return datastore.find().type(Category.class).addFilter("active", FilterOperator.EQUAL, Boolean.TRUE).returnAll().now();
+		return datastore.find().type(Category.class)
+				.addFilter("active", FilterOperator.EQUAL, Boolean.TRUE)
+				.addSort("axe")
+				.returnAll().now();
 	}
 }

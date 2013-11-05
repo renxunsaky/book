@@ -15,7 +15,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${ categories }" var="item">
-					<tr>
+					<tr id="row_cat_${ item.id }">
 						<td>${ item.name }</td>
 						<td>${ item.description }</td>
 						<td>
@@ -24,8 +24,8 @@
 						<td>${ item.active }</td>
 						<td>${ item.axe }</td>
 						<td>
-							<input type="button" class="btn_small btn_blue editCategoryBtn" data-id="${ item.id }" value='<spring:message code="admin.category.edit"></spring:message>' />
-							<input type="button" class="btn_small btn_blue deleteCategoryBtn" data-id="${ item.id }" value='<spring:message code="admin.category.delete"></spring:message>' />
+							<input type="button" onclick="javascript:editCategory(${ item.id });" class="btn_small btn_blue editCategoryBtn" data-id="${ item.id }" value='<spring:message code="admin.category.edit"></spring:message>' />
+							<input type="button" onclick="javascript:deleteCategory(${ item.id });" class="btn_small btn_blue deleteCategoryBtn" data-id="${ item.id }" value='<spring:message code="admin.category.delete"></spring:message>' />
 						</td>
 					</tr>
 				</c:forEach>
@@ -40,25 +40,5 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#category_table").dataTable();
-		
-		$(".editCategoryBtn").click(function() {
-			var url = "<c:url value='/admin/category/edit.html'/>";
-			var id = $(this).attr("data-id");
-			var lang = $("#changeLangSelect").val();
-			$.get(url, {id: id, lang: lang}, function(data) {
-				$(".editArea").html(data);
-				$(".editArea").show();
-			});
-		});
-		
-		$(".deleteCategoryBtn").click(function() {
-			var id = $(this).attr("data-id");
-			var url = "<c:url value='/admin/category/delete.html'/>";
-			$.post(url, {id: id}, function(data) {
-				if (data != null && data == "OK") {
-					$(this).parent().parent().remove();
-				}
-			});
-		});
 	});
 </script>

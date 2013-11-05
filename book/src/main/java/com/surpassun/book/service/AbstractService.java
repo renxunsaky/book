@@ -21,6 +21,8 @@ public interface AbstractService<T> {
 	public List<T> getAll();
 
 	public void update(T obj);
+	
+	public void updateAll(Collection<T> objs);
 
 	public void delete(T obj);
 	

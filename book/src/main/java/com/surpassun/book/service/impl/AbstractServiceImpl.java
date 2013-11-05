@@ -52,6 +52,10 @@ public class AbstractServiceImpl<T> implements AbstractService<T> {
 	public void update(T obj) {
 		datastore.storeOrUpdate(obj);
 	}
+	
+	public void updateAll(Collection<T> objs) {
+		datastore.updateAll(objs);
+	}
 
 	public void delete(T obj) {
 		datastore.delete(obj);

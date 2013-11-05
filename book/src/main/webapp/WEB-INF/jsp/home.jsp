@@ -7,6 +7,11 @@
 		<div class="global">
 			<div class="wrapper">
 				<div class="head">
+					<div class="flags right">
+						<a href="?locale=zh_CN"><img title="<spring:message code="lang.chinese" />" alt='<spring:message code="lang.chinese" />' src='<c:url value="/img/china.png" />'></a>
+						<a href="?locale=fr_FR"><img title="<spring:message code="lang.french" />" alt='<spring:message code="lang.french" />' src='<c:url value="/img/france.png" />'></a>
+						<a href="?locale=en_US"><img title="<spring:message code="lang.english" />" alt='<spring:message code="lang.english" />' src='<c:url value="/img/uk.png" />'></a>
+					</div>
 					<div class="logo">
 						<img alt="Makeup-Mengdie" src='<c:url value="/img/logo.png" />' />
 					</div>

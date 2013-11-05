@@ -9,12 +9,15 @@ public class Category {
 	private String imageUrl;
 	private Boolean active;
 	private int axe;
+	//blob key of the image
+	private String blobKey;
 	
 	public Category() {
 	}
 	
-	public Category(String imageUrl, Boolean active, int axe) {
+	public Category(String imageUrl, String blobKey, Boolean active, int axe) {
 		this.imageUrl = imageUrl;
+		this.blobKey = blobKey;
 		this.active = active;
 		this.axe = axe;
 	}
@@ -53,5 +56,13 @@ public class Category {
 
 	public void setAxe(int axe) {
 		this.axe = axe;
+	}
+
+	public String getBlobKey() {
+		return blobKey;
+	}
+
+	public void setBlobKey(String blobKey) {
+		this.blobKey = blobKey;
 	}
 }

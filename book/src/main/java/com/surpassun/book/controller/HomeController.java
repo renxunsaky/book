@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
@@ -53,8 +55,9 @@ public class HomeController {
 	@RequestMapping(value="/home", method = RequestMethod.GET)
 	public String view(HttpServletRequest request, Model model) {
 		String lang = DEFAULT_LANG;
-		if (request.getLocale() != null) {
-			lang = request.getLocale().getLanguage();
+		Locale locale = RequestContextUtils.getLocale(request);
+		if (locale != null) {
+			lang = locale.getLanguage();
 		}
 		
 		List<CategoryBean> navItems = new ArrayList<CategoryBean>();

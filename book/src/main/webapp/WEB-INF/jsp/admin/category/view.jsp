@@ -9,7 +9,7 @@
 <hr class="separator" />
 
 <div class="actionButtons">
-	<select name="language" id="changeLangSelect" onchange="javascript:changeLanguage(this.value);">
+	<select name="language" id="changeLangSelect">
 		<option value="zh" ><spring:message code="lang.chinese"></spring:message></option>
 		<option value="fr"><spring:message code="lang.french"></spring:message></option>
 		<option value="en"><spring:message code="lang.english"></spring:message></option>
@@ -30,6 +30,24 @@
 			$(".dataTable").html(data);
 		});
 	}
+	
+	function editCategory(categoryId) {
+		var url = "<c:url value='/admin/category/edit.html'/>";
+		var lang = $("#changeLangSelect").val();
+		$.get(url, {id: categoryId, lang: lang}, function(data) {
+			$(".editArea").html(data);
+			$(".editArea").show();
+		});
+	};
+	
+	function deleteCategory(categoryId) {
+		var url = "<c:url value='/admin/category/delete.html'/>";
+		$.post(url, {id: categoryId}, function(data) {
+			if (data != null && data == "OK") {
+				$("#row_cat_" + categoryId).remove();
+			}
+		});
+	};
 	
 	$(document).ready(function() {
 		$("#create_new_cat_btn").click(function() {
