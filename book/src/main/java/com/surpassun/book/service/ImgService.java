@@ -15,5 +15,10 @@ public interface ImgService extends AbstractService<Img> {
 	public List<Img> getImages(List<String> blobKeys);
 	
 	public List<Img> getImagesByCategory(String categoryBlobKey);
+	
+	public List<Img> getImagesByCategoryId(Long categoryId);
 
+	public boolean showImageInFront(Long imageId, boolean showInFront);
+
+	public List<Img> getImagesForFront();
 }

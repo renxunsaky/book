@@ -7,12 +7,12 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.google.appengine.api.blobstore.BlobKey;
-import com.google.appengine.api.datastore.Category;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.ServingUrlOptions;
+import com.surpassun.book.model.Category;
 import com.surpassun.book.model.Img;
 import com.surpassun.book.service.ImgService;
 
@@ -34,12 +34,6 @@ public class ImgServiceImpl extends AbstractServiceImpl<Img> implements ImgServi
 
 	@Override
 	public Map<Img, Key> saveImages(List<Img> uploadedImages) {
-		if (uploadedImages != null) {
-			for (Img image : uploadedImages) {
-				String servingUrl = imgService.getServingUrl(ServingUrlOptions.Builder.withBlobKey(new BlobKey(image.getBlobKey())));
-				image.setServingUrl(servingUrl);
-			}
-		}
 		return datastore.storeAll(uploadedImages);
 	}
 
@@ -60,4 +54,28 @@ public class ImgServiceImpl extends AbstractServiceImpl<Img> implements ImgServi
 			.returnAll().now();
 	}
 
+	@Override
+	public List<Img> getImagesByCategoryId(Long categoryId) {
+		return datastore.find().type(Img.class)
+				.addFilter("categoryId", FilterOperator.EQUAL, categoryId)
+				.returnAll().now();
+	}
+
+	@Override
+	public boolean showImageInFront(Long imageId, boolean showInFront) {
+		Img image = get(imageId);
+		if (image != null) {
+			image.setShowInFront(showInFront);
+			update(image);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public List<Img> getImagesForFront() {
+		return datastore.find().type(Img.class)
+				.addFilter("showInFront", FilterOperator.EQUAL, true)
+				.returnAll().now();
+	}
 }

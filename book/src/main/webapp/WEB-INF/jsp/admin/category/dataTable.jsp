@@ -19,7 +19,7 @@
 						<td>${ item.name }</td>
 						<td>${ item.description }</td>
 						<td>
-							<img alt="Icon" src="${ item.imageUrl }" height="170px" width="170px" />
+							<img alt="Icon" src="${ item.imageUrl }=s170-c" height="170px" width="170px" />
 						</td>
 						<td>${ item.active }</td>
 						<td>${ item.axe }</td>

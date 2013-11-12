@@ -54,7 +54,7 @@
 			</td>
 			<td>
 				<c:if test="${ not empty categoryBean.imageUrl }">
-					<img src="${categoryBean.imageUrl}" height="170px" width="170px" />
+					<img src="${categoryBean.imageUrl}=s170-c" />
 				</c:if>
  				<input type="file" name="image" />
 			</td>

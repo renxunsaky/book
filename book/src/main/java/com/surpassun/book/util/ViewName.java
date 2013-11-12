@@ -18,4 +18,7 @@ public interface ViewName {
 	
 	String NO_AUTHORISATION = "/error/403";
 
+	String CATEGORY = "category/view";
+	String REDIRECT_CATEGORY_VIEW = REDIRECT + "/images/";
+
 }

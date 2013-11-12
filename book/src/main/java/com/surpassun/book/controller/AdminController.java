@@ -3,6 +3,7 @@ package com.surpassun.book.controller;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
@@ -27,8 +29,11 @@ import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.ServingUrlOptions;
 import com.surpassun.book.bean.CategoryBean;
 import com.surpassun.book.model.Category;
+import com.surpassun.book.model.Img;
 import com.surpassun.book.service.CategoryService;
+import com.surpassun.book.service.ImgService;
 import com.surpassun.book.service.LanguageService;
+import com.surpassun.book.util.BookUtil;
 import com.surpassun.book.util.Constants;
 import com.surpassun.book.util.ParamUtil;
 import com.surpassun.book.util.ViewName;
@@ -44,24 +49,40 @@ public class AdminController {
 	@Autowired
 	private LanguageService languageService;
 	
+	@Autowired
+	private ImgService imgService;
+	
 	private final static String DEFAULT_LANG = "zh";
 	
 	private static BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 	
+	
+	/********************************		Methods for managing images			****************************************/
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String view(ModelMap model) {
+	public String view(HttpServletRequest request, ModelMap model) {
+		List<Category> categories = categoryService.getAll();
+		List<CategoryBean> beans = convertCategoryBeans(categories, getLang(request));
 		
+		List<Img> images = null;
+		if (categories != null && categories.size() > 0) {
+			Long categoryId = categories.get(0).getId();
+			images = imgService.getImagesByCategoryId(categoryId);
+		}
+		
+		model.addAttribute(Constants.CATEGORIES, beans);
+		model.addAttribute(Constants.IMAGES, images);
 		model.addAttribute(Constants.ADMIN_MENU, Constants.ADMIN_MENU_IMAGE);
 		return ViewName.ADMIN_IMAGE;
 	}
 	
+	/********************************		Methods for managing categories			****************************************/
 	@RequestMapping(value = "/admin/category", method = RequestMethod.GET)
-	public String viewCategory(ModelMap model) {
+	public String viewCategory(HttpServletRequest request, ModelMap model) {
 
 		String successPath = blobstoreService.createUploadUrl(Constants.ADMIN_CREATE_CATEGORY_PATH);
 		
 		List<Category> categories = categoryService.getAll();
-		List<CategoryBean> beans = convertCategoryBeans(categories, DEFAULT_LANG);
+		List<CategoryBean> beans = convertCategoryBeans(categories, getLang(request));
 		
 		model.addAttribute(Constants.CATEGORIES, beans);
 		model.addAttribute(Constants.ADMIN_MENU, Constants.ADMIN_MENU_CATEGORY);
@@ -83,12 +104,10 @@ public class AdminController {
 	@RequestMapping(value = "/admin/category/edit", method = RequestMethod.GET)
 	public String editCategory(@RequestParam("lang") String lang, @RequestParam("id") Long id, Model model) {
 		Category category = categoryService.get(id);
-		CategoryBean bean = new CategoryBean();
-		bean.copyFromEntity(category, lang, languageService);
 		
 		String successPath = blobstoreService.createUploadUrl(Constants.ADMIN_CREATE_CATEGORY_PATH);
 		
-		model.addAttribute(Constants.CATEGORY_BEAN, bean);
+		model.addAttribute(Constants.CATEGORY_BEAN, BookUtil.convertCategoryToBean(category, lang, languageService));
 		model.addAttribute(Constants.ADMIN_MENU, Constants.ADMIN_MENU_CATEGORY);
 		model.addAttribute(Constants.SUCCESS_PATH, successPath);
 		return ViewName.ADMIN_CATEGORY_EDIT_FORM;
@@ -112,6 +131,7 @@ public class AdminController {
 		bean.setLang(ParamUtil.getString(request, "lang", DEFAULT_LANG));
 		bean.setImageUrl(ParamUtil.getString(request, "imageUrl"));
 		bean.setBlobKey(ParamUtil.getString(request, "blobKey"));
+		
 		Map<String, List<BlobKey>> images = blobstoreService.getUploads(request);
 		BlobKey k = null;
 		if (images != null && images.size() > 0) {
@@ -134,9 +154,9 @@ public class AdminController {
 		}
 		
 		if (bean.getId() != null && bean.getId() > 0) {
-			categoryService.update(bean.convertToEntity(k));
+			categoryService.update(BookUtil.convertToCategory(bean, k));
 		} else {
-			Key key = categoryService.save(bean.convertToEntity(k));
+			Key key = categoryService.save(BookUtil.convertToCategory(bean, k));
 			bean.setId(key.getId());
 		}
 		languageService.saveLangForCategory(bean);
@@ -156,12 +176,20 @@ public class AdminController {
 		List<CategoryBean> beans = new ArrayList<>();
 		if (categories != null) {
 			for (Category category : categories) {
-				CategoryBean bean = new CategoryBean();
-				bean.copyFromEntity(category, lang, languageService);
-				beans.add(bean);
+				beans.add(BookUtil.convertCategoryToBean(category, lang, languageService));
 			}
 		}
 		
 		return beans;
+	}
+	
+	private String getLang(HttpServletRequest request) {
+		String lang = DEFAULT_LANG;
+		Locale locale = RequestContextUtils.getLocale(request);
+		if (locale != null) {
+			lang = locale.getLanguage();
+		}
+		
+		return lang;
 	}
 }

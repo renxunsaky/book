@@ -1,10 +1,5 @@
 package com.surpassun.book.bean;
 
-import org.springframework.beans.BeanUtils;
-
-import com.google.appengine.api.blobstore.BlobKey;
-import com.surpassun.book.model.Category;
-import com.surpassun.book.service.LanguageService;
 
 public class CategoryBean {
 
@@ -95,23 +90,5 @@ public class CategoryBean {
 
 	public void setBlobKey(String blobKey) {
 		this.blobKey = blobKey;
-	}
-
-	public void copyFromEntity(Category category, String lang, LanguageService languageService) {
-		BeanUtils.copyProperties(category, this);
-		setLang(lang);
-		setName(languageService.getContent(Category.class.getName() + category.getId() + "name", lang));
-		setDescription(languageService.getContent(Category.class.getName() + category.getId() + "description", lang));
-	}
-
-	public Category convertToEntity(BlobKey blobKey) {
-		Category cat = new Category();
-		BeanUtils.copyProperties(this, cat);
-		
-		//the admin has uploaded a new icon
-		if (blobKey != null) {
-			cat.setBlobKey(blobKey.getKeyString());
-		}
-		return cat;
 	}
 }

@@ -61,6 +61,16 @@ public class AbstractServiceImpl<T> implements AbstractService<T> {
 		datastore.delete(obj);
 	}
 	
+	public boolean delete(Long id) {
+		T obj = datastore.load(getType(), id);
+		if (obj != null) {
+			datastore.delete(obj);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public void deleteAll(Collection<T> objs) {
 		datastore.deleteAll(objs);
 	}

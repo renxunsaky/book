@@ -26,5 +26,7 @@ public interface AbstractService<T> {
 
 	public void delete(T obj);
 	
+	public boolean delete(Long id);
+	
 	public void deleteAll(Collection<T> objs);
 }

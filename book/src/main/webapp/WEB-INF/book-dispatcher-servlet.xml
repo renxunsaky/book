@@ -43,6 +43,11 @@
 	         	<property name="paramName" value="locale" />
 	         </bean>
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/home.html"/>
+			<mvc:mapping path="/images/**"/>
+			<bean class="com.surpassun.book.interceptor.NavigationInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
 	<bean id="exceptionResolver" class="com.surpassun.book.util.BookExceptionResolver">
@@ -58,7 +63,9 @@
 		<property name="exceptionAttribute">
 			<value>exception</value>
 		</property>
+		<!--
 		<property name="defaultErrorView" value="redirect:/error/index.html" />
+		-->
 	</bean>
  
 	<bean

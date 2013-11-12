@@ -26,6 +26,9 @@
 				<div class="title">
 					<h1><spring:message code="admin.title"/></h1>
 				</div>
+				<div class="right goHome">
+					<a href='<c:url value="/home.html" />'><spring:message code="goto.home.page" /></a>
+				</div>
 				<div class="sidebar left">
 					<ul>
 						<li class='${ adminMenu eq "category" ? "selected" : "" }'>

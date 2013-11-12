@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.google.code.twig.annotation.Child;
 import com.google.code.twig.annotation.Id;
-import com.google.code.twig.annotation.Parent;
 import com.google.code.twig.annotation.Type;
 
 public class Img {
@@ -18,8 +17,7 @@ public class Img {
 	@Type(Date.class)
 	private Date createDate;
 	
-	@Parent
-	private Category category;
+	private Long categoryId;
 	
 	private int views;
 	
@@ -27,15 +25,22 @@ public class Img {
 	
 	@Child
 	private List<Comment> comments;
+	
+	private boolean showInFront;
+	
+	public Img() {
+	}
 
-	public Img(String blobKey, Date createDate, Category category, int views,
-			List<Comment> comments) {
+	public Img(String blobKey, Date createDate, Long categoryId, int views,
+			List<Comment> comments, boolean showInFront, String servingUrl) {
 		super();
 		this.blobKey = blobKey;
 		this.createDate = createDate;
-		this.category = category;
+		this.categoryId = categoryId;
 		this.views = views;
 		this.comments = comments;
+		this.showInFront = showInFront;
+		this.servingUrl = servingUrl;
 	}
 
 	public Long getId() {
@@ -62,12 +67,12 @@ public class Img {
 		this.createDate = createDate;
 	}
 
-	public Category getCategory() {
-		return category;
+	public Long getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public int getViews() {
@@ -92,5 +97,13 @@ public class Img {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public boolean isShowInFront() {
+		return showInFront;
+	}
+
+	public void setShowInFront(boolean showInFront) {
+		this.showInFront = showInFront;
 	}
 }
