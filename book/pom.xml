@@ -208,7 +208,22 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<web>
+						<resources>
+							<resource>
+					          <target>${project.build.directory}/book-0.0.1-SNAPSHOT/stylesheets</target>
+					          <directory>${basedir}/src/main/webapp/stylesheets</directory>
+					        </resource>
+							<resource>
+					          <target>${project.build.directory}/book-0.0.1-SNAPSHOT/WEB-INF/jsp</target>
+					          <directory>${basedir}/src/main/webapp/WEB-INF/jsp</directory>
+					        </resource>
+						</resources>
+					</web>
+				</configuration>
 			</plugin>
+ 
         </plugins>
     </build>
 </project>

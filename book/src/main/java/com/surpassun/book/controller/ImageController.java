@@ -50,18 +50,36 @@ public class ImageController {
 
     @Autowired
     private LanguageService languageService;
+    
+    @RequestMapping(value = "/images/{categoryId}", method = RequestMethod.GET)
+    public String imagesView(HttpServletRequest request, @PathVariable("categoryId") Long categoryId, Model model) {
+    	return renderData(request, categoryId, null, model);
+    }
 
-	@RequestMapping(value = "/images/{categoryId}", method = RequestMethod.GET)
-	public String imagesView(HttpServletRequest request, @PathVariable("categoryId") Long categoryId, Model model) {
-		Category category = categoryService.get(categoryId);
-		List<Img> images = imageService.getImagesByCategoryId(categoryId);
-		
-		String successPath = blobstoreService.createUploadUrl(Constants.UPLOAD_IMAGES_PATH);
-		model.addAttribute(Constants.SUCCESS_PATH, successPath);
-		model.addAttribute(Constants.CATEGORY_BEAN, BookUtil.convertCategoryToBean(category, BookUtil.getLang(request), languageService));
-		model.addAttribute(Constants.IMAGES, images);
-		return ViewName.CATEGORY;
-	}
+    @RequestMapping(value = "/images/{categoryId}/{imageId}", method = RequestMethod.GET)
+    public String imagesViewWithImageId(HttpServletRequest request, @PathVariable("categoryId") Long categoryId,
+			@PathVariable("imageId") Long imageId, Model model) {
+    	return renderData(request, categoryId, imageId, model);
+    }
+    
+    private String renderData(HttpServletRequest request, Long categoryId,
+			Long imageId, Model model) {
+    	Category category = categoryService.get(categoryId);
+    	List<Img> images = imageService.getImagesByCategoryId(categoryId);
+    	if (images != null && imageId != null) {
+    		for (Img img : images) {
+    			if (img.getId().equals(imageId)) {
+    				model.addAttribute(Constants.START_INDEX, images.indexOf(img));
+    			}
+    		}
+    	}
+    	
+    	String successPath = blobstoreService.createUploadUrl(Constants.UPLOAD_IMAGES_PATH);
+    	model.addAttribute(Constants.SUCCESS_PATH, successPath);
+    	model.addAttribute(Constants.CATEGORY_BEAN, BookUtil.convertCategoryToBean(category, BookUtil.getLang(request), languageService));
+    	model.addAttribute(Constants.IMAGES, images);
+    	return ViewName.CATEGORY;
+    }
 	
 	@RequestMapping(value = "/images/upload", method = RequestMethod.POST)
 	public String uploadImages(HttpServletRequest request, @RequestParam(required = true) Long categoryId, Model model) {

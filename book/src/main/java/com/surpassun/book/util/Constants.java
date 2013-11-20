@@ -17,4 +17,5 @@ public interface Constants {
 	String HAS_ADMIN_PERMISSION = "hasAdminPermission";
 	String HTML_SUFFIX = ".html";
 	String SHOW_ADMIN_CONTROLS = "showAdminControls";
+	String START_INDEX = "startIndex";
 }

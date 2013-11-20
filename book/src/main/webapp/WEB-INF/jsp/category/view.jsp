@@ -2,8 +2,9 @@
 
 <c:choose>
 	<c:when test="${ not empty images }">
+		<a id="foto"></a>
 		<div class="fotorama" data-nav="thumbs" data-thumbheight="60" 
-			data-maxwidth="100%" data-width="100%"
+			data-maxwidth="100%" data-width="100%" data-startIndex="${ startIndex }"
 			data-allowfullscreen="native" data-hash="true" data-loop="true"
 			data-keyboard="true" data-swipe="true" data-trackpad="true">
 			<c:forEach items="${ images }" var="image">
@@ -49,19 +50,6 @@
 </c:if>
 
 <script type="text/javascript">
-	/*
-	function deleteImage(imageId) {
-		var categoryId = "${categoryBean.id}";
-		var url = "<c:url value='/images/delete/" + imageId + ".html'/>";
-		$.post(url, {categoryId: categoryId}, function(data) {
-			if (data != null && data == "OK") {
-				$("#image_" + imageId).remove();
-				$("#image_comment_div_" + imageId).remove();
-				$("#show_in_front_div_" + imageId).remove();
-			}
-		});
-	}*/
-	
 	function toggleComments() {
 		var src = $(".fotorama__stage .fotorama__active img").attr("src");
 		if (src != undefined && src != null) {
@@ -93,10 +81,16 @@
 			height: containerHeight
 		});
 		
-		$(".fotorama__nav__shaft, fotorama__stage").click(function(){
-			toggleComments();
+		$(".fotorama__nav__shaft, .fotorama__stage").click(function(){
+			setTimeout("toggleComments()", 1000);
 		});
 		
+		$("body").keydown(function(e) {
+			if(e.keyCode == 37 || e.keyCode == 39) { // left
+				setTimeout("toggleComments()", 1000);
+			}
+		});
+
 		var checked = $("#toggleAdminControls").is(":checked");
 		if (checked) {
 			$(".adminDiv").hide();
@@ -111,7 +105,7 @@
 			$.post(url, {showInFront: showInFront});
 		});
 
-		setTimeout("toggleComments()", 2000);
+		setTimeout("toggleComments()", 5000);
 		
 	});
 </script>

@@ -8,12 +8,7 @@
 
 	<web>
 		<link target="/">
-			<dir name="/Users/Denis/git/book/book/target/m2e-wtp/web-resources">
-				<exclude name="/"/>
-			</dir>
-		</link>
-		<link target="/">
-			<dir name="/Users/Denis/git/book/book/src/main/webapp">
+			<dir name="/Users/Denis/git/book/book/target/book-0.0.1-SNAPSHOT/WEB-INF/jsp">
 			</dir>
 		</link>
 	</web>

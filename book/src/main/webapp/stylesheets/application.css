@@ -31,7 +31,6 @@
 	}
 	
 .content {
-	background: url("../img/diams.png") no-repeat scroll right top rgba(0, 0, 0, 0);
     padding-bottom: 20px;
     min-height: 693px;
 }
@@ -95,3 +94,55 @@
 	    width: auto;
 	    margin-top: 20px;
 	}
+	
+/**Home page**/
+.rm_wrapper {
+	border: 1px solid #333333;
+	border-radius: 10px;
+	box-shadow: 0 0 10px #666666;
+	-moz-border-radius: 10px;
+	-moz-box-shadow: 0 0 10px #666666;
+	-o-border-radius: 10px;
+	-o-box-shadow: 0 0 10px #666666;
+	-webkit-border-radius: 10px;
+	-webkit-box-shadow: 0 0 10px #666666;
+    float: left;
+	height: 335px;
+    padding: 10px 5px 10px 0;
+    width: 100%;
+}
+
+	.rm_wrapper .rm_container {
+		background-color: #000000;
+		border: 1px solid #AAAAAA;
+	    border-radius: 10px;
+		box-shadow: 0 0 10px #888888;
+		-moz-border-radius: 10px;
+		-moz-box-shadow: 0 0 10px #888888;
+		-o-border-radius: 10px;
+		-o-box-shadow: 0 0 10px #888888;
+		-webkit-border-radius: 10px;
+		-webkit-box-shadow: 0 0 10px #888888;
+	    float: left;
+	    height: 330px;
+	    margin-left: 5px;
+	    overflow: hidden;
+	    position: relative;
+	    width: 220px;
+	}
+	
+		.rm_wrapper .rm_container .imgDiv {
+			position: absolute;
+			left: 225px;
+			overflow: hidden;
+			opacity: 0.25;
+		}
+		.rm_wrapper .rm_container .active {
+			position: absolute;
+			left: 0;
+			opacity: 1;
+		}
+		
+		.rm_wrapper .rm_container .active a:hover {
+			opacity: 0.5;
+		}

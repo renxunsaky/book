@@ -4,7 +4,7 @@
 	<c:if test="${ not empty navItems }">
 		<c:forEach items="${ navItems }" var="item">
 			<li>
-				<a href='<c:url value="/images/${ item.id }.html"></c:url>'>
+				<a href='<c:url value="/images/${ item.id }.html#foto"></c:url>'>
 					<img src="${ item.imageUrl }=s170-c" />
 					<span class="sdt_active"></span>
 					<span class="sdt_wrap">

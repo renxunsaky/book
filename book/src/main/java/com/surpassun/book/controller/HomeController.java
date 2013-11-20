@@ -1,5 +1,6 @@
 package com.surpassun.book.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,39 @@ public class HomeController {
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String view(HttpServletRequest request, Model model) {
 		List<Img> images = imgService.getImagesForFront();
-		model.addAttribute(Constants.IMAGES, images);
+		
+		List<Img> list1 = new ArrayList<>();
+		List<Img> list2 = new ArrayList<>();
+		List<Img> list3 = new ArrayList<>();
+		List<Img> list4 = new ArrayList<>();
+		List<Img> list5 = new ArrayList<>();
+		
+		if (images != null) {
+			int size = images.size();
+			for (int i = 0; i < size; i++) {
+				if (i < size) {
+					list1.add(images.get(i++));
+				}
+				if (i < size) {
+					list2.add(images.get(i++));
+				}
+				if (i < size) {
+					list3.add(images.get(i++));
+				}
+				if (i < size) {
+					list4.add(images.get(i++));
+				}
+				if (i < size) {
+					list5.add(images.get(i++));
+				}
+			}
+		}
+		
+		model.addAttribute("list1", list1);
+		model.addAttribute("list2", list2);
+		model.addAttribute("list3", list3);
+		model.addAttribute("list4", list4);
+		model.addAttribute("list5", list5);
 		return ViewName.HOME;
 	}
 	
