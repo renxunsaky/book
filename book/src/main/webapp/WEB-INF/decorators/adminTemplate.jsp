@@ -23,6 +23,15 @@
 	<body>
 		<div class="adminGlobal">
 			<div class="wrapper">
+				<div class="flags right">
+					<c:if test="${ hasAdminPermission }">
+						<span><spring:message code="hide.admin.contorls" /></span>
+						<input type="checkbox" id="toggleAdminControls" name="toggleAdminControls" <c:if test="${ not showAdminControls }">checked="checked"</c:if> onclick="javascript:toggleAdminControls(this.checked);" />
+					</c:if>
+					<a href="?locale=zh_CN"><img title="<spring:message code="lang.chinese" />" alt='<spring:message code="lang.chinese" />' src='<c:url value="/img/china.png" />' /></a>
+					<a href="?locale=fr_FR"><img title="<spring:message code="lang.french" />" alt='<spring:message code="lang.french" />' src='<c:url value="/img/france.png" />' /></a>
+					<a href="?locale=en_US"><img title="<spring:message code="lang.english" />" alt='<spring:message code="lang.english" />' src='<c:url value="/img/uk.png" />' /></a>
+				</div>
 				<div class="title">
 					<h1><spring:message code="admin.title"/></h1>
 				</div>
@@ -38,7 +47,7 @@
 						</li>
 						<li class='${ adminMenu eq "image" ? "selected" : "" }'>
 							<a href='<c:url value="/admin/image.html" />'>
-								<spring:message code="admin.menu.image"/>
+								<spring:message code="admin.image"/>
 							</a>
 						</li>
 					</ul>

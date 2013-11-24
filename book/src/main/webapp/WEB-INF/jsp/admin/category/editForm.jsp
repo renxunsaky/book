@@ -61,5 +61,5 @@
 		</tr>
 	</table>
 	
-	<input type="submit" value='<spring:message code="admin.category.save" />' class="btn_blue btn_medium" />
+	<input type="submit" value='<spring:message code="admin.save" />' class="btn_blue btn_medium" />
 </form>

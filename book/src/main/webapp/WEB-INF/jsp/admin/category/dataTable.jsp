@@ -5,12 +5,12 @@
 		<table id="category_table">
 			<thead>
 				<tr>
-					<th><spring:message code="admin.category.name" /></th>
-					<th><spring:message code="admin.category.description" /></th>
-					<th><spring:message code="admin.category.icon" /></th>
-					<th><spring:message code="admin.category.active" /></th>
-					<th><spring:message code="admin.category.axe" /></th>
-					<th><spring:message code="admin.category.action" /></th>
+					<th><spring:message code="admin.name" /></th>
+					<th><spring:message code="admin.description" /></th>
+					<th><spring:message code="admin.icon" /></th>
+					<th><spring:message code="admin.active" /></th>
+					<th><spring:message code="admin.axe" /></th>
+					<th><spring:message code="admin.action" /></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -24,8 +24,8 @@
 						<td>${ item.active }</td>
 						<td>${ item.axe }</td>
 						<td>
-							<input type="button" onclick="javascript:editCategory(${ item.id });" class="btn_small btn_blue editCategoryBtn" data-id="${ item.id }" value='<spring:message code="admin.category.edit"></spring:message>' />
-							<input type="button" onclick="javascript:deleteCategory(${ item.id });" class="btn_small btn_blue deleteCategoryBtn" data-id="${ item.id }" value='<spring:message code="admin.category.delete"></spring:message>' />
+							<input type="button" onclick="javascript:editCategory(${ item.id });" class="btn_small btn_blue editCategoryBtn" data-id="${ item.id }" value='<spring:message code="admin.edit"></spring:message>' />
+							<input type="button" onclick="javascript:deleteCategory(${ item.id });" class="btn_small btn_blue deleteCategoryBtn" data-id="${ item.id }" value='<spring:message code="admin.delete"></spring:message>' />
 						</td>
 					</tr>
 				</c:forEach>

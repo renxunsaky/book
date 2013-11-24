@@ -135,6 +135,7 @@ public class AdminController {
 		Map<String, List<BlobKey>> images = blobstoreService.getUploads(request);
 		BlobKey k = null;
 		if (images != null && images.size() > 0) {
+			log.info(images.size() + " images uploaded");
 			for (Entry<String, List<BlobKey>> entries : images.entrySet()) {
 				String key = entries.getKey();
 				List<BlobKey> value = entries.getValue();
@@ -149,8 +150,10 @@ public class AdminController {
 			}
 			
 			ImagesService imgService = ImagesServiceFactory.getImagesService();
-			String imgUrl = imgService.getServingUrl(ServingUrlOptions.Builder.withBlobKey(k));
-			bean.setImageUrl(imgUrl);
+			if (k != null) {
+				String imgUrl = imgService.getServingUrl(ServingUrlOptions.Builder.withBlobKey(k));
+				bean.setImageUrl(imgUrl);
+			}
 		}
 		
 		if (bean.getId() != null && bean.getId() > 0) {

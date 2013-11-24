@@ -1,7 +1,5 @@
 package com.surpassun.book.util;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -305,7 +303,7 @@ public class GetterUtil {
 
 	public static String get(String value, String defaultValue) {
 		if (value != null) {
-			value = new String(value.getBytes(Charset.forName("ISO-8859-1")), Charset.forName(StringPool.UTF8));
+			//value = new String(value.getBytes(Charset.forName("ISO-8859-1")), Charset.forName(StringPool.UTF8));
 			value = value.trim();
 			value = StringUtil.replace(
 				value, StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE);

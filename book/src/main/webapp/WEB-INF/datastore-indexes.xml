@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datastore-indexes
+	autoGenerate="true">
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="com_surpassun_book_model_Category" ancestor="false">
+        <property name="active" direction="asc"/>
+        <property name="axe" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>

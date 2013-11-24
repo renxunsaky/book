@@ -247,6 +247,7 @@ public class ParamUtil {
 	}
 
 	public static void print(HttpServletRequest request) {
+		@SuppressWarnings("unchecked")
 		Enumeration<String> enu = request.getParameterNames();
 
 		while (enu.hasMoreElements()) {

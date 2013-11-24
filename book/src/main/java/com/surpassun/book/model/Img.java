@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.code.twig.annotation.Child;
 import com.google.code.twig.annotation.Id;
+import com.google.code.twig.annotation.Index;
 import com.google.code.twig.annotation.Type;
 
 public class Img {
@@ -12,11 +13,13 @@ public class Img {
 	@Id
 	private Long id;
 	
+	@Index
 	private String blobKey;
 	
 	@Type(Date.class)
 	private Date createDate;
 	
+	@Index
 	private Long categoryId;
 	
 	private int views;
@@ -26,6 +29,7 @@ public class Img {
 	@Child
 	private List<Comment> comments;
 	
+	@Index
 	private boolean showInFront;
 	
 	public Img() {

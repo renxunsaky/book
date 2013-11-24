@@ -102,7 +102,7 @@ public class ImageController {
 						Img image = new Img(blobKey.getKeyString(), new Date(), categoryId, 0, null, false, imgUrl);
 						uploadedImages.add(image);
 					} catch (Exception e) {
-						log.log(Level.SEVERE, "error while uploading image, blok key : " + blobKey.getKeyString());
+						log.log(Level.SEVERE, "error while uploading image, blok key : " + blobKey.getKeyString(), e);
 					}
 				}
 			}

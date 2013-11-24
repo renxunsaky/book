@@ -1,13 +1,18 @@
 package com.surpassun.book.model;
 
 import com.google.code.twig.annotation.Id;
+import com.google.code.twig.annotation.Index;
 
 public class Language {
 
 	@Id
 	private Long id;
+	
+	@Index
 	private String key;
 	private String content;
+	
+	@Index
 	private String lang;
 	
 	public Language() {

@@ -1,13 +1,18 @@
 package com.surpassun.book.model;
 
+import com.google.code.twig.annotation.Entity;
 import com.google.code.twig.annotation.Id;
+import com.google.code.twig.annotation.Index;
 
+@Entity(allocateIdsBy = 0)
 public class Category {
 
 	@Id
 	private Long id;
 	private String imageUrl;
+	@Index
 	private Boolean active;
+	@Index
 	private int axe;
 	//blob key of the image
 	private String blobKey;

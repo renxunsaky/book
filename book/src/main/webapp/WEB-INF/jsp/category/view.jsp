@@ -8,7 +8,7 @@
 			data-allowfullscreen="native" data-hash="true" data-loop="true"
 			data-keyboard="true" data-swipe="true" data-trackpad="true">
 			<c:forEach items="${ images }" var="image">
-				<img src="${ image.servingUrl }=s1600" />
+				<img src="${ image.servingUrl }=s1600" data-imgid="${ image.id }" />
 			</c:forEach>
 		</div>
 	</c:when>
@@ -20,14 +20,14 @@
 </c:choose>
 
 <c:forEach items="${ images }" var="image">
-	<div class="commentDiv invisible" id="image_comment_div_${ image.blobKey }">
+	<div class="commentDiv invisible" id="image_comment_div_${ image.id }">
 		<div class="socialLinks"></div>
 		<div class="ratings"></div>
 		<div class="comments"></div>
 	</div>
 		
 	<c:if test="${ hasAdminPermission }">
-		<div class="showInFront invisible" id="show_in_front_div_${ image.blobKey }">
+		<div class="showInFront invisible" id="show_in_front_div_${ image.id }">
 			<span><spring:message code="images.show.in.front"></spring:message></span>
 			<input type="checkbox" data-imgId="${ image.id }" class="showInFrontCheck" name="showInFront" <c:if test='${ image.showInFront }'>checked="checked"</c:if> />
 			<form action='<c:url value="/images/delete/${ image.id }.html" />' method="post">
@@ -50,19 +50,14 @@
 </c:if>
 
 <script type="text/javascript">
-	function toggleComments() {
-		var src = $(".fotorama__stage .fotorama__active img").attr("src");
-		if (src != undefined && src != null) {
-			var blobkey = src.substring(src.lastIndexOf("/") + 1, src.lastIndexOf("=s1600"));
-			
-			//hide other comments while show the correspanding one
-			$(".commentDiv").hide();
-			$("#image_comment_div_" + blobkey).show();
-			
-			$(".showInFront").hide();
-			if (!$("#toggleAdminControls").is(":checked")) {
-				$("#show_in_front_div_" + blobkey).show();
-			}
+	function toggleComments(imgId) {
+		//hide other comments while show the correspanding one
+		$(".commentDiv").hide();
+		$("#image_comment_div_" + imgId).show();
+		
+		$(".showInFront").hide();
+		if (!$("#toggleAdminControls").is(":checked")) {
+			$("#show_in_front_div_" + imgId).show();
 		}
 	}
 	
@@ -76,21 +71,19 @@
 		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 			isMobile = true;
 		}
+		
+		$('.fotorama')
+			.on('fotorama:show', function (e, fotorama) {
+				var activeFrame = fotorama.activeFrame;
+				var imgId = activeFrame.imgid;
+				toggleComments(imgId);
+		}).fotorama();
+	
 		$(".fotorama").fotorama({
 			nav: isMobile ? 'dots' : 'thumbs',
 			height: containerHeight
 		});
 		
-		$(".fotorama__nav__shaft, .fotorama__stage").click(function(){
-			setTimeout("toggleComments()", 1000);
-		});
-		
-		$("body").keydown(function(e) {
-			if(e.keyCode == 37 || e.keyCode == 39) { // left
-				setTimeout("toggleComments()", 1000);
-			}
-		});
-
 		var checked = $("#toggleAdminControls").is(":checked");
 		if (checked) {
 			$(".adminDiv").hide();
@@ -104,8 +97,5 @@
 			var url = "<c:url value='/images/showInFront/" + imageId + ".html'/>";
 			$.post(url, {showInFront: showInFront});
 		});
-
-		setTimeout("toggleComments()", 5000);
-		
 	});
 </script>
