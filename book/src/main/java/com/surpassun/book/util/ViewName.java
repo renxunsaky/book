@@ -9,6 +9,8 @@ public interface ViewName {
     String REDIRECT_HOME = REDIRECT + "/home.html";
     
     String HOME = "home";
+    
+    String CONTACT_ME = "contact";
 
 	String ADMIN_IMAGE = "admin/image/view";
 	String ADMIN_CATEGORY = "admin/category/view";

@@ -4,7 +4,7 @@
 	<head>
 	</head>
 	<body>
-		<div class="rm_wrapper">
+		<div class="rm_wrapper rectangle">
 			<c:if test="${ not empty list1 }">
 				<div id="rm_container_1" class="rm_container">
 					<c:forEach items="${ list1 }" var="img" varStatus="status">
@@ -14,6 +14,9 @@
 						</c:if>
 						<c:if test="${ status.count == fn:length(list1) }">
 							<c:set value="imgDiv last" var="className" />
+						</c:if>
+						<c:if test="${ status.count == fn:length(list1) and 1 == fn:length(list1)}">
+							<c:set value="active imgDiv last" var="className" />
 						</c:if>
 						<div class="${ className }" id="img_c1_${ status.count }">
 							<a href='<c:url value="/images/${ img.categoryId }/${ img.id }.html#foto" />'>
@@ -33,6 +36,9 @@
 						<c:if test="${ status.count == fn:length(list2) }">
 							<c:set value="imgDiv last" var="className" />
 						</c:if>
+						<c:if test="${ status.count == fn:length(list2) and 1 == fn:length(list2)}">
+							<c:set value="active imgDiv last" var="className" />
+						</c:if>
 						<div class="${ className }" id="img_c2_${ status.count }">
 							<a href='<c:url value="/images/${ img.categoryId }/${ img.id }.html#foto" />'>
 								<img src="${ img.servingUrl }" width="220" height="330" />
@@ -50,6 +56,9 @@
 						</c:if>
 						<c:if test="${ status.count == fn:length(list3) }">
 							<c:set value="imgDiv last" var="className" />
+						</c:if>
+						<c:if test="${ status.count == fn:length(list3) and 1 == fn:length(list3)}">
+							<c:set value="active imgDiv last" var="className" />
 						</c:if>
 						<div class="${ className }" id="img_c3_${ status.count }">
 							<a href='<c:url value="/images/${ img.categoryId }/${ img.id }.html#foto" />'>
@@ -69,6 +78,9 @@
 						<c:if test="${ status.count == fn:length(list4) }">
 							<c:set value="imgDiv last" var="className" />
 						</c:if>
+						<c:if test="${ status.count == fn:length(list4) and 1 == fn:length(list4)}">
+							<c:set value="active imgDiv last" var="className" />
+						</c:if>
 						<div class="${ className }" id="img_c4_${ status.count }">
 							<a href='<c:url value="/images/${ img.categoryId }/${ img.id }.html#foto" />'>
 								<img src="${ img.servingUrl }" width="220" height="330" />
@@ -86,6 +98,9 @@
 						</c:if>
 						<c:if test="${ status.count == fn:length(list5) }">
 							<c:set value="imgDiv last" var="className" />
+						</c:if>
+						<c:if test="${ status.count == fn:length(list5) and 1 == fn:length(list5)}">
+							<c:set value="active imgDiv last" var="className" />
 						</c:if>
 						<div class="${ className }" id="img_c5_${ status.count }">
 							<a href='<c:url value="/images/${ img.categoryId }/${ img.id }.html#foto" />'>
@@ -115,22 +130,25 @@
 							nextImgDivId = "img_c" + id + "_" + 1;
 						}
 						
-						//hide current one
-						jCurrentDiv.animate({
-							left: "-225px",
-							opacity: 0.25
-						}, 2000, function() {
-							jCurrentDiv.removeClass("active");
-							jCurrentDiv.addClass("invisible");
-							jCurrentDiv.css("left", "225px");
-						});
-						
-						$("#" + nextImgDivId).addClass("active");
-						$("#" + nextImgDivId).removeClass("invisible");
-						$("#" + nextImgDivId).animate({
-							left: 0,
-							opacity: 1
-						}, 2000);
+						//only one element in this container
+						if (jImgDivId != nextImgDivId) {
+							//hide current one
+							jCurrentDiv.animate({
+								left: "-225px",
+								opacity: 0.25
+							}, 2000, function() {
+								jCurrentDiv.removeClass("active");
+								jCurrentDiv.addClass("invisible");
+								jCurrentDiv.css("left", "225px");
+							});
+							
+							$("#" + nextImgDivId).addClass("active");
+							$("#" + nextImgDivId).removeClass("invisible");
+							$("#" + nextImgDivId).animate({
+								left: 0,
+								opacity: 1
+							}, 2000);
+						}
 					}
 				});
 			}

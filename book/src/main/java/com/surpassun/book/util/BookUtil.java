@@ -1,11 +1,13 @@
 package com.surpassun.book.util;
 
+import java.util.Iterator;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
@@ -17,6 +19,7 @@ import com.surpassun.book.service.LanguageService;
 public class BookUtil {
 	
 	private final static String DEFAULT_LANG = "zh";
+	private final static String ADMIN = "admin";
 
 	public static String getLang(HttpServletRequest request) {
 		String lang = DEFAULT_LANG;
@@ -53,6 +56,15 @@ public class BookUtil {
 	
 	public static boolean hasAdminPermission(HttpServletRequest request) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		return auth.isAuthenticated();
+		if (auth != null && auth.getAuthorities() != null) {
+			@SuppressWarnings("unchecked")
+			Iterator<SimpleGrantedAuthority> it = (Iterator<SimpleGrantedAuthority>) auth.getAuthorities().iterator();
+			while (it.hasNext()) {
+				if (ADMIN.endsWith(it.next().getAuthority()) && auth.isAuthenticated()) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

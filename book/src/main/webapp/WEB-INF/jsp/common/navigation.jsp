@@ -15,4 +15,15 @@
 			</li>
 		</c:forEach>
 	</c:if>
+	
+	<li>
+		<a href='<c:url value="/contact.html" />'>
+			<img src='<c:url value="/img/me.jpg" />' />
+			<span class="sdt_active"></span>
+			<span class="sdt_wrap">
+				<span class="sdt_link"><spring:message code="contact.me" /></span>
+				<span class="sdt_descr"></span>
+			</span>
+		</a>
+	</li>
 </ul>

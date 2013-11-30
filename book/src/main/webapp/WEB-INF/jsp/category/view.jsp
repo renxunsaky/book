@@ -2,8 +2,8 @@
 
 <c:choose>
 	<c:when test="${ not empty images }">
-		<a id="foto"></a>
-		<div class="fotorama" data-nav="thumbs" data-thumbheight="60" 
+		<a id="foto" name="foto"></a>
+		<div class="fotorama rectangle" data-nav="thumbs" data-thumbheight="60" 
 			data-maxwidth="100%" data-width="100%" data-startIndex="${ startIndex }"
 			data-allowfullscreen="native" data-hash="true" data-loop="true"
 			data-keyboard="true" data-swipe="true" data-trackpad="true">
@@ -13,7 +13,7 @@
 		</div>
 	</c:when>
 	<c:otherwise>
-		<div class="emptyResultDiv">
+		<div class="emptyResultDiv rectangle">
 			<spring:message code="images.no.result" arguments="${ categoryBean.name }"></spring:message>
 		</div>
 	</c:otherwise>
@@ -39,7 +39,7 @@
 </c:forEach>
 
 <c:if test="${ hasAdminPermission }">
-	<div class="adminDiv">
+	<div class="adminDiv rectangle">
 		<span><spring:message code="images.upload.images"></spring:message></span>
 		<form action="${ successPath }" enctype="multipart/form-data" method="post" id="uploadImagesForm">
 			<input type="hidden" name="categoryId" value="${ categoryBean.id }" />

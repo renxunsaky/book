@@ -114,3 +114,16 @@ hr.separator {
 	display: block;
 	clear: both;
 }
+
+.rectangle {
+	border: 1px solid #333333;
+    border-radius: 10px;
+	box-shadow: 0 0 10px #666666;
+	-moz-border-radius: 10px;
+	-moz-box-shadow: 0 0 10px #666666;
+	-o-border-radius: 10px;
+	-o-box-shadow: 0 0 10px #666666;
+	-webkit-border-radius: 10px;
+	-webkit-box-shadow: 0 0 10px #666666;
+    color: #FFFFFF;
+}

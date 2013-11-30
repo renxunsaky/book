@@ -69,7 +69,14 @@ public class HomeController {
 	public String toggleAdminControls(@RequestParam(defaultValue = "true") boolean showAdminControls, HttpServletRequest request) {
 		if (BookUtil.hasAdminPermission(request)) {
 			request.getSession().setAttribute(Constants.SHOW_ADMIN_CONTROLS, showAdminControls);
+			return Constants.OK;
+		} else {
+			return Constants.KO;
 		}
-		return Constants.OK;
+	}
+	
+	@RequestMapping(value = "/contact", method = RequestMethod.GET)
+	public String contact(HttpServletRequest request) {
+		return ViewName.CONTACT_ME;
 	}
 }
