@@ -9,3 +9,4 @@ but there is nearly no project created with the three technologies.
 So I will try to create a small project with the three technologies above. The goal of this project is to allow my
 friend who learns makeup to upload her works(pictures) which can be viewed by anyone.
 
+the <a href="www.gmd221.com">book</a> demo is available here : <a href="www.gmd221.com">www.gmd221.com</a>
