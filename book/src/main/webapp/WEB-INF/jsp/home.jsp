@@ -20,7 +20,7 @@
 						</c:if>
 						<div class="${ className }" id="img_c1_${ status.count }">
 							<a href='<c:url value="/images/${ img.categoryId }/${ img.id }.html#foto" />'>
-								<img src="${ img.servingUrl }" width="220" height="330" />
+								<img src="${ img.servingUrl }" width="220" height="330" alt='<spring:message code="image.description" />' />
 							</a>
 						</div>
 					</c:forEach>
@@ -41,7 +41,7 @@
 						</c:if>
 						<div class="${ className }" id="img_c2_${ status.count }">
 							<a href='<c:url value="/images/${ img.categoryId }/${ img.id }.html#foto" />'>
-								<img src="${ img.servingUrl }" width="220" height="330" />
+								<img src="${ img.servingUrl }" width="220" height="330" alt='<spring:message code="image.description" />' />
 							</a>
 						</div>
 					</c:forEach>
@@ -62,7 +62,7 @@
 						</c:if>
 						<div class="${ className }" id="img_c3_${ status.count }">
 							<a href='<c:url value="/images/${ img.categoryId }/${ img.id }.html#foto" />'>
-								<img src="${ img.servingUrl }" width="220" height="330" />
+								<img src="${ img.servingUrl }" width="220" height="330" alt='<spring:message code="image.description" />' />
 							</a>
 						</div>
 					</c:forEach>
@@ -83,7 +83,7 @@
 						</c:if>
 						<div class="${ className }" id="img_c4_${ status.count }">
 							<a href='<c:url value="/images/${ img.categoryId }/${ img.id }.html#foto" />'>
-								<img src="${ img.servingUrl }" width="220" height="330" />
+								<img src="${ img.servingUrl }" width="220" height="330" alt='<spring:message code="image.description" />' />
 							</a>
 						</div>
 					</c:forEach>
@@ -104,7 +104,7 @@
 						</c:if>
 						<div class="${ className }" id="img_c5_${ status.count }">
 							<a href='<c:url value="/images/${ img.categoryId }/${ img.id }.html#foto" />'>
-								<img src="${ img.servingUrl }" width="220" height="330" />
+								<img src="${ img.servingUrl }" width="220" height="330" alt='<spring:message code="image.description" />' />
 							</a>
 						</div>
 					</c:forEach>

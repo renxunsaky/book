@@ -6,6 +6,10 @@
 	<body>
 		<div class="rectangle contact">
 			<p>
+				<span class="contactMethod"><spring:message code="contact.method.name" /> : </span>
+				<span class="contactInfo"><spring:message code="contact.info.name" /> </span>
+			</p>
+			<p>
 				<span class="contactMethod"><spring:message code="contact.method.mail" /> : </span>
 				<span class="contactInfo">gmd221@gmail.com</span>
 			</p>

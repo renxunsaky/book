@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -137,10 +138,9 @@ public class AdminController {
 		if (images != null && images.size() > 0) {
 			log.info(images.size() + " images uploaded");
 			for (Entry<String, List<BlobKey>> entries : images.entrySet()) {
-				String key = entries.getKey();
 				List<BlobKey> value = entries.getValue();
 				for (BlobKey blobKey : value) {
-					log.info("uploaded image blobkey for item[" + key + "] :" + blobKey);
+					log.info("blobkey : " + blobKey.getKeyString());
 					k = blobKey;
 					break;
 				}
@@ -150,9 +150,14 @@ public class AdminController {
 			}
 			
 			ImagesService imgService = ImagesServiceFactory.getImagesService();
-			if (k != null) {
-				String imgUrl = imgService.getServingUrl(ServingUrlOptions.Builder.withBlobKey(k));
-				bean.setImageUrl(imgUrl);
+			if (!StringUtils.isEmpty(k.getKeyString())) {
+				try{
+					log.info("generating serving url for image : " + k.getKeyString());
+					String imgUrl = imgService.getServingUrl(ServingUrlOptions.Builder.withBlobKey(k));
+					bean.setImageUrl(imgUrl);
+				} catch (Exception e) {
+					log.severe("error while get image's serving url");
+				}
 			}
 		}
 		

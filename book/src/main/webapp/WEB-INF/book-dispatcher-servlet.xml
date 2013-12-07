@@ -44,6 +44,7 @@
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/home.html"/>
+			<mvc:mapping path="/contact.html"/>
 			<mvc:mapping path="/images/**"/>
 			<bean class="com.surpassun.book.interceptor.NavigationInterceptor" />
 		</mvc:interceptor>

@@ -1,22 +1,23 @@
 .global {
 	background: url("../img/main-bg.jpg") no-repeat scroll 50% 0 #000000;
-	overflow: hidden;
+	position: relative;
+	min-width: 1145px;
 }
 
 .wrapper {
 	margin: 0 auto;
-	width: 90%;
+	width: 1145px;
 }
 
 .flags {
 	height: 30px;
-    margin-bottom: 20px;
 }
 
 .head {
 	height: 250px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     padding-top: 15px;
+    width: 1145px;
 }
 	
 	.head .logo {
@@ -26,12 +27,13 @@
 	
 	.head .navigation {
 		float: left;
-	    margin: 100px 0 0 40px;
+	    margin: 70px 0 0 40px;
 	}
 	
 .content {
     padding-bottom: 20px;
     min-height: 693px;
+    width: 1145px;
 }
 
 .editCategoryBtn {
@@ -41,10 +43,12 @@
 	.emptyResultDiv {
 	    font-size: 18px;
 	    padding: 20px;
+	    text-align: center;
 	}
 	
 	.fotorama {
 		margin: 0 auto;
+		background-color: #000000;
 	}
 	
 	.commentDiv {
@@ -60,14 +64,13 @@
 		padding: 20px;
 	    width: auto;
 	    margin-top: 20px;
+	    text-align: center;
 	}
 	
 /**Home page**/
 .rm_wrapper {
-    float: left;
 	height: 335px;
     padding: 10px 5px 10px 0;
-    width: 100%;
 }
 
 	.rm_wrapper .rm_container {
@@ -94,15 +97,21 @@
 			left: 225px;
 			overflow: hidden;
 			opacity: 0.25;
+			display: none;
 		}
 		.rm_wrapper .rm_container .active {
 			position: absolute;
 			left: 0;
 			opacity: 1;
+			display: block;	
 		}
 		
 		.rm_wrapper .rm_container .active a:hover {
 			opacity: 0.5;
+		}
+		
+		.fotorama__loaded--img:hover {
+		    opacity: 0.5;
 		}
 		
 /**Contact page**/

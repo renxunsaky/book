@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.util.WebUtils;
@@ -37,7 +38,7 @@ public class NavigationInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request,
     		HttpServletResponse response, Object handler) throws Exception {
     	String localeString = request.getParameter("locale");
-    	Locale locale = Locale.getDefault();
+    	Locale locale = request.getLocale();
 		if (localeString != null) {
 			locale = StringUtils.parseLocaleString(localeString);
 		} else {
@@ -48,7 +49,7 @@ public class NavigationInterceptor extends HandlerInterceptorAdapter {
 		}
 		
 		LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
-		if (localeResolver != null) {
+		if (localeResolver != null && !(localeResolver instanceof AcceptHeaderLocaleResolver)) {
 			localeResolver.setLocale(request, response, locale);
 		} else {
 			WebUtils.setSessionAttribute(request, LOCALE_SESSION_ATTRIBUTE_NAME, locale);

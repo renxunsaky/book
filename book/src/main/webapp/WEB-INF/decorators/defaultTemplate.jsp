@@ -6,12 +6,15 @@
 		<title><decorator:title default="Book" /></title>
 		
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="keywords" content="book,gallary,makeup,maquillage,coiffure,hairdressing,marriage,mariage,wedding,mengdie,gao，\u9ad8\u68a6\u8776,\u4f5c\u54c1\u96c6,\u5316\u5986,\u65b0\u5a18\u5986,\u5f69\u5986"/>
-        <meta name="description" content="\u9ad8\u68a6\u8776\u7684\u4e2a\u4eba\u4f5c\u54c1\u96c6" />
+        <meta name="keywords" content="book,gallary,makeup,maquillage,coiffure,hairdressing,marriage,mariage,wedding,mengdie,gao"/>
+        <meta name="description" content='<spring:message code="site.description" />' />
         <meta name="author" content="sakyrenxun@gmail.com" />
         <meta name="copyright" content="Copyright 2013, Ren Xun. All Rights Reserved." />
         <meta name="application-name" content="Book" />
-		
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        
+        <link rel="canonical" href="http://www.gmd221.com" />
+		<link rel="home" href="http://www.gmd221.com" />
 		<link type="text/css" rel="stylesheet" href="<c:url value="/stylesheets/main.css" />" />
 		<link type="text/css" rel="stylesheet" href="<c:url value="/stylesheets/fotorama.css" />" />
 		<link rel="shortcut icon" href="<c:url value="/img/favicon.ico" />" type="image/x-icon"/>
@@ -53,6 +56,7 @@
 						<a href="?locale=fr_FR"><img title="<spring:message code="lang.french" />" alt='<spring:message code="lang.french" />' src='<c:url value="/img/france.png" />' /></a>
 						<a href="?locale=en_US"><img title="<spring:message code="lang.english" />" alt='<spring:message code="lang.english" />' src='<c:url value="/img/uk.png" />' /></a>
 					</div>
+					<div class="clear"></div>
 					<div class="logo">
 						<a href='<c:url value="/home.html" />'>
 							<img alt="Makeup-Mengdie" src='<c:url value="/img/logo.png" />' />
@@ -63,6 +67,7 @@
 						<%@ include file="/WEB-INF/jsp/common/navigation.jsp"%>
 					</div>
 				</div>
+				<div class="clear"></div>
 				<div class="content">
 					<decorator:body />
 				</div>

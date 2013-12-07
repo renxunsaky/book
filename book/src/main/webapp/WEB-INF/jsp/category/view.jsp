@@ -2,8 +2,7 @@
 
 <c:choose>
 	<c:when test="${ not empty images }">
-		<a id="foto" name="foto"></a>
-		<div class="fotorama rectangle" data-nav="thumbs" data-thumbheight="60" 
+		<div id="foto" class="fotorama rectangle" data-nav="thumbs" data-thumbheight="60" 
 			data-maxwidth="100%" data-width="100%" data-startIndex="${ startIndex }"
 			data-allowfullscreen="native" data-hash="true" data-loop="true"
 			data-keyboard="true" data-swipe="true" data-trackpad="true">
