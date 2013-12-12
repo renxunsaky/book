@@ -5,6 +5,10 @@ body {
     padding: 0;
 }
 
+img {
+	border: none;
+}
+
 .left {
 	float: left;
 }
