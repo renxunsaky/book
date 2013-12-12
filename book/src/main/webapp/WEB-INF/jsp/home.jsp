@@ -114,7 +114,7 @@
 		
 		<script type="text/javascript">
 			$(document).ready(function() {
-				setInterval("makeAnimation()", 5000);
+				setInterval("makeAnimation()", 3000);
 			});
 			
 			function makeAnimation() {
@@ -142,12 +142,12 @@
 								jCurrentDiv.css("left", "225px");
 							});
 							
-							$("#" + nextImgDivId).addClass("active");
-							$("#" + nextImgDivId).removeClass("invisible");
 							$("#" + nextImgDivId).animate({
 								left: 0,
 								opacity: 1
 							}, 2000);
+							$("#" + nextImgDivId).addClass("active");
+							$("#" + nextImgDivId).removeClass("invisible");
 						}
 					}
 				});
